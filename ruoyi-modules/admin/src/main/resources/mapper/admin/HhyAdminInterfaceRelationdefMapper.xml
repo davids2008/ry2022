@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminInterfaceRelationdefMapper">
+
+    <resultMap type="HhyAdminInterfaceRelationdef" id="HhyAdminInterfaceRelationdefResult">
+        <result property="interRelId"    column="inter_rel_id"    />
+        <result property="interId"    column="inter_id"    />
+        <result property="interRelName"    column="inter_rel_name"    />
+        <result property="interRelUid"    column="inter_rel_uid"    />
+        <result property="interRelDescription"    column="inter_rel_description"    />
+        <result property="interUid"    column="inter_uid"    />
+        <result property="interUid1"    column="inter_uid1"    />
+        <result property="interRelRole1"    column="inter_rel_role1"    />
+        <result property="interRelRole2"    column="inter_rel_role2"    />
+        <result property="viewId"    column="view_id"    />
+        <result property="viewUid"    column="view_uid"    />
+        <result property="interRelSeq"    column="inter_rel_seq"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminInterfaceRelationdefVo">
+        select inter_rel_id, inter_id, inter_rel_name, inter_rel_uid, inter_rel_description, inter_uid, inter_uid1, inter_rel_role1, inter_rel_role2, view_id, view_uid, inter_rel_seq, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_interface_relationdef
+    </sql>
+
+    <select id="selectHhyAdminInterfaceRelationdefList" parameterType="HhyAdminInterfaceRelationdef" resultMap="HhyAdminInterfaceRelationdefResult">
+        <include refid="selectHhyAdminInterfaceRelationdefVo"/>
+        <where>
+            <if test="interId != null "> and inter_id = #{interId}</if>
+            <if test="interRelName != null  and interRelName != ''"> and inter_rel_name like concat('%', #{interRelName}, '%')</if>
+            <if test="interRelUid != null "> and inter_rel_uid = #{interRelUid}</if>
+            <if test="interRelDescription != null  and interRelDescription != ''"> and inter_rel_description = #{interRelDescription}</if>
+            <if test="interUid != null  and interUid != ''"> and inter_uid = #{interUid}</if>
+            <if test="interUid1 != null  and interUid1 != ''"> and inter_uid1 = #{interUid1}</if>
+            <if test="interRelRole1 != null "> and inter_rel_role1 = #{interRelRole1}</if>
+            <if test="interRelRole2 != null "> and inter_rel_role2 = #{interRelRole2}</if>
+            <if test="viewId != null "> and view_id = #{viewId}</if>
+            <if test="viewUid != null "> and view_uid = #{viewUid}</if>
+            <if test="interRelSeq != null "> and inter_rel_seq = #{interRelSeq}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminInterfaceRelationdefById" parameterType="Long" resultMap="HhyAdminInterfaceRelationdefResult">
+        <include refid="selectHhyAdminInterfaceRelationdefVo"/>
+        where inter_rel_id = #{interRelId}
+    </select>
+
+    <insert id="insertHhyAdminInterfaceRelationdef" parameterType="HhyAdminInterfaceRelationdef" useGeneratedKeys="true" keyProperty="interRelId">
+        insert into hhy_admin_interface_relationdef
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="interId != null">inter_id,</if>
+            <if test="interRelName != null and interRelName != ''">inter_rel_name,</if>
+            <if test="interRelUid != null">inter_rel_uid,</if>
+            <if test="interRelDescription != null">inter_rel_description,</if>
+            <if test="interUid != null">inter_uid,</if>
+            <if test="interUid1 != null">inter_uid1,</if>
+            <if test="interRelRole1 != null">inter_rel_role1,</if>
+            <if test="interRelRole2 != null">inter_rel_role2,</if>
+            <if test="viewId != null">view_id,</if>
+            <if test="viewUid != null">view_uid,</if>
+            <if test="interRelSeq != null">inter_rel_seq,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="interId != null">#{interId},</if>
+            <if test="interRelName != null and interRelName != ''">#{interRelName},</if>
+            <if test="interRelUid != null">#{interRelUid},</if>
+            <if test="interRelDescription != null">#{interRelDescription},</if>
+            <if test="interUid != null">#{interUid},</if>
+            <if test="interUid1 != null">#{interUid1},</if>
+            <if test="interRelRole1 != null">#{interRelRole1},</if>
+            <if test="interRelRole2 != null">#{interRelRole2},</if>
+            <if test="viewId != null">#{viewId},</if>
+            <if test="viewUid != null">#{viewUid},</if>
+            <if test="interRelSeq != null">#{interRelSeq},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminInterfaceRelationdef" parameterType="HhyAdminInterfaceRelationdef">
+        update hhy_admin_interface_relationdef
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="interId != null">inter_id = #{interId},</if>
+            <if test="interRelName != null and interRelName != ''">inter_rel_name = #{interRelName},</if>
+            <if test="interRelUid != null">inter_rel_uid = #{interRelUid},</if>
+            <if test="interRelDescription != null">inter_rel_description = #{interRelDescription},</if>
+            <if test="interUid != null">inter_uid = #{interUid},</if>
+            <if test="interUid1 != null">inter_uid1 = #{interUid1},</if>
+            <if test="interRelRole1 != null">inter_rel_role1 = #{interRelRole1},</if>
+            <if test="interRelRole2 != null">inter_rel_role2 = #{interRelRole2},</if>
+            <if test="viewId != null">view_id = #{viewId},</if>
+            <if test="viewUid != null">view_uid = #{viewUid},</if>
+            <if test="interRelSeq != null">inter_rel_seq = #{interRelSeq},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where inter_rel_id = #{interRelId}
+    </update>
+
+    <delete id="deleteHhyAdminInterfaceRelationdefById" parameterType="Long">
+        delete from hhy_admin_interface_relationdef where inter_rel_id = #{interRelId}
+    </delete>
+
+    <delete id="deleteHhyAdminInterfaceRelationdefByIds" parameterType="String">
+        delete from hhy_admin_interface_relationdef where inter_rel_id in
+        <foreach item="interRelId" collection="array" open="(" separator="," close=")">
+            #{interRelId}
+        </foreach>
+    </delete>
+</mapper>

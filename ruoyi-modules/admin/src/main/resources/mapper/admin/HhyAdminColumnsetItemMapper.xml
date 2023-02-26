@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminColumnsetItemMapper">
+
+    <resultMap type="HhyAdminColumnsetItem" id="HhyAdminColumnsetItemResult">
+        <result property="colItemId"    column="col_item_id"    />
+        <result property="colId"    column="col_id"    />
+        <result property="colUuid"    column="col_uuid"    />
+        <result property="interProId"    column="inter_pro_id"    />
+        <result property="interRelId"    column="inter_rel_id"    />
+        <result property="colItemInterface"    column="col_item_interface"    />
+        <result property="colItemUid"    column="col_item_uid"    />
+        <result property="colItemName"    column="col_item_name"    />
+        <result property="colDescription"    column="col_description"    />
+        <result property="colProType"    column="col_pro_type"    />
+        <result property="colRelationId"    column="col_relation_id"    />
+        <result property="colRelationUid"    column="col_relation_uid"    />
+        <result property="colItemSeq"    column="col_item_seq"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminColumnsetItemVo">
+        select col_item_id, col_id, col_uuid, inter_pro_id, inter_rel_id, col_item_interface, col_item_uid, col_item_name, col_description, col_pro_type, col_relation_id, col_relation_uid, col_item_seq, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_columnset_item
+    </sql>
+
+    <select id="selectHhyAdminColumnsetItemList" parameterType="HhyAdminColumnsetItem" resultMap="HhyAdminColumnsetItemResult">
+        <include refid="selectHhyAdminColumnsetItemVo"/>
+        <where>
+            <if test="colId != null "> and col_id = #{colId}</if>
+            <if test="colUuid != null  and colUuid != ''"> and col_uuid = #{colUuid}</if>
+            <if test="interProId != null "> and inter_pro_id = #{interProId}</if>
+            <if test="interRelId != null "> and inter_rel_id = #{interRelId}</if>
+            <if test="colItemInterface != null  and colItemInterface != ''"> and col_item_interface = #{colItemInterface}</if>
+            <if test="colItemUid != null  and colItemUid != ''"> and col_item_uid = #{colItemUid}</if>
+            <if test="colItemName != null  and colItemName != ''"> and col_item_name like concat('%', #{colItemName}, '%')</if>
+            <if test="colDescription != null  and colDescription != ''"> and col_description = #{colDescription}</if>
+            <if test="colProType != null  and colProType != ''"> and col_pro_type = #{colProType}</if>
+            <if test="colRelationId != null "> and col_relation_id = #{colRelationId}</if>
+            <if test="colRelationUid != null "> and col_relation_uid = #{colRelationUid}</if>
+            <if test="colItemSeq != null "> and col_item_seq = #{colItemSeq}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminColumnsetItemById" parameterType="Long" resultMap="HhyAdminColumnsetItemResult">
+        <include refid="selectHhyAdminColumnsetItemVo"/>
+        where col_item_id = #{colItemId}
+    </select>
+
+    <insert id="insertHhyAdminColumnsetItem" parameterType="HhyAdminColumnsetItem" useGeneratedKeys="true" keyProperty="colItemId">
+        insert into hhy_admin_columnset_item
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="colId != null">col_id,</if>
+            <if test="colUuid != null and colUuid != ''">col_uuid,</if>
+            <if test="interProId != null">inter_pro_id,</if>
+            <if test="interRelId != null">inter_rel_id,</if>
+            <if test="colItemInterface != null and colItemInterface != ''">col_item_interface,</if>
+            <if test="colItemUid != null and colItemUid != ''">col_item_uid,</if>
+            <if test="colItemName != null and colItemName != ''">col_item_name,</if>
+            <if test="colDescription != null">col_description,</if>
+            <if test="colProType != null and colProType != ''">col_pro_type,</if>
+            <if test="colRelationId != null">col_relation_id,</if>
+            <if test="colRelationUid != null">col_relation_uid,</if>
+            <if test="colItemSeq != null">col_item_seq,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="colId != null">#{colId},</if>
+            <if test="colUuid != null and colUuid != ''">#{colUuid},</if>
+            <if test="interProId != null">#{interProId},</if>
+            <if test="interRelId != null">#{interRelId},</if>
+            <if test="colItemInterface != null and colItemInterface != ''">#{colItemInterface},</if>
+            <if test="colItemUid != null and colItemUid != ''">#{colItemUid},</if>
+            <if test="colItemName != null and colItemName != ''">#{colItemName},</if>
+            <if test="colDescription != null">#{colDescription},</if>
+            <if test="colProType != null and colProType != ''">#{colProType},</if>
+            <if test="colRelationId != null">#{colRelationId},</if>
+            <if test="colRelationUid != null">#{colRelationUid},</if>
+            <if test="colItemSeq != null">#{colItemSeq},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminColumnsetItem" parameterType="HhyAdminColumnsetItem">
+        update hhy_admin_columnset_item
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="colId != null">col_id = #{colId},</if>
+            <if test="colUuid != null and colUuid != ''">col_uuid = #{colUuid},</if>
+            <if test="interProId != null">inter_pro_id = #{interProId},</if>
+            <if test="interRelId != null">inter_rel_id = #{interRelId},</if>
+            <if test="colItemInterface != null and colItemInterface != ''">col_item_interface = #{colItemInterface},</if>
+            <if test="colItemUid != null and colItemUid != ''">col_item_uid = #{colItemUid},</if>
+            <if test="colItemName != null and colItemName != ''">col_item_name = #{colItemName},</if>
+            <if test="colDescription != null">col_description = #{colDescription},</if>
+            <if test="colProType != null and colProType != ''">col_pro_type = #{colProType},</if>
+            <if test="colRelationId != null">col_relation_id = #{colRelationId},</if>
+            <if test="colRelationUid != null">col_relation_uid = #{colRelationUid},</if>
+            <if test="colItemSeq != null">col_item_seq = #{colItemSeq},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where col_item_id = #{colItemId}
+    </update>
+
+    <delete id="deleteHhyAdminColumnsetItemById" parameterType="Long">
+        delete from hhy_admin_columnset_item where col_item_id = #{colItemId}
+    </delete>
+
+    <delete id="deleteHhyAdminColumnsetItemByIds" parameterType="String">
+        delete from hhy_admin_columnset_item where col_item_id in
+        <foreach item="colItemId" collection="array" open="(" separator="," close=")">
+            #{colItemId}
+        </foreach>
+    </delete>
+</mapper>

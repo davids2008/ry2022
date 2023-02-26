@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminProjectUserlistMapper">
+    
+    <resultMap type="HhyAdminProjectUserlist" id="HhyAdminProjectUserlistResult">
+        <result property="projUId"    column="proj_u_id"    />
+        <result property="projJd"    column="proj_jd"    />
+        <result property="projUUid"    column="proj_u_uid"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminProjectUserlistVo">
+        select proj_u_id, proj_jd, proj_u_uid, status, create_by, create_time, update_by, update_time, remark from hhy_admin_project_userlist
+    </sql>
+
+    <select id="selectHhyAdminProjectUserlistList" parameterType="HhyAdminProjectUserlist" resultMap="HhyAdminProjectUserlistResult">
+        <include refid="selectHhyAdminProjectUserlistVo"/>
+        <where>  
+            <if test="projJd != null "> and proj_jd = #{projJd}</if>
+            <if test="projUUid != null  and projUUid != ''"> and proj_u_uid = #{projUUid}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectHhyAdminProjectUserlistById" parameterType="Long" resultMap="HhyAdminProjectUserlistResult">
+        <include refid="selectHhyAdminProjectUserlistVo"/>
+        where proj_u_id = #{projUId}
+    </select>
+        
+    <insert id="insertHhyAdminProjectUserlist" parameterType="HhyAdminProjectUserlist" useGeneratedKeys="true" keyProperty="projUId">
+        insert into hhy_admin_project_userlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projJd != null">proj_jd,</if>
+            <if test="projUUid != null">proj_u_uid,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projJd != null">#{projJd},</if>
+            <if test="projUUid != null">#{projUUid},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateHhyAdminProjectUserlist" parameterType="HhyAdminProjectUserlist">
+        update hhy_admin_project_userlist
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projJd != null">proj_jd = #{projJd},</if>
+            <if test="projUUid != null">proj_u_uid = #{projUUid},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where proj_u_id = #{projUId}
+    </update>
+
+    <delete id="deleteHhyAdminProjectUserlistById" parameterType="Long">
+        delete from hhy_admin_project_userlist where proj_u_id = #{projUId}
+    </delete>
+
+    <delete id="deleteHhyAdminProjectUserlistByIds" parameterType="String">
+        delete from hhy_admin_project_userlist where proj_u_id in 
+        <foreach item="projUId" collection="array" open="(" separator="," close=")">
+            #{projUId}
+        </foreach>
+    </delete>
+</mapper>

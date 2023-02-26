@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminColumnsetMapper">
+
+    <resultMap type="HhyAdminColumnset" id="HhyAdminColumnsetResult">
+        <result property="colId"    column="col_id"    />
+        <result property="colUuid"    column="col_uuid"    />
+        <result property="colName"    column="col_name"    />
+        <result property="colDescription"    column="col_description"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminColumnsetVo">
+        select col_id, col_uuid, col_name, col_description, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_columnset
+    </sql>
+
+    <select id="selectHhyAdminColumnsetList" parameterType="HhyAdminColumnset" resultMap="HhyAdminColumnsetResult">
+        <include refid="selectHhyAdminColumnsetVo"/>
+        <where>
+            <if test="colUuid != null "> and col_uuid = #{colUuid}</if>
+            <if test="colName != null  and colName != ''"> and col_name like concat('%', #{colName}, '%')</if>
+            <if test="colDescription != null  and colDescription != ''"> and col_description = #{colDescription}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminColumnsetById" parameterType="Long" resultMap="HhyAdminColumnsetResult">
+        <include refid="selectHhyAdminColumnsetVo"/>
+        where col_id = #{colId}
+    </select>
+
+    <insert id="insertHhyAdminColumnset" parameterType="HhyAdminColumnset" useGeneratedKeys="true" keyProperty="colId">
+        insert into hhy_admin_columnset
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="colUuid != null">col_uuid,</if>
+            <if test="colName != null and colName != ''">col_name,</if>
+            <if test="colDescription != null">col_description,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="colUuid != null">#{colUuid},</if>
+            <if test="colName != null and colName != ''">#{colName},</if>
+            <if test="colDescription != null">#{colDescription},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminColumnset" parameterType="HhyAdminColumnset">
+        update hhy_admin_columnset
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="colUuid != null">col_uuid = #{colUuid},</if>
+            <if test="colName != null and colName != ''">col_name = #{colName},</if>
+            <if test="colDescription != null">col_description = #{colDescription},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where col_id = #{colId}
+    </update>
+
+    <delete id="deleteHhyAdminColumnsetById" parameterType="Long">
+        delete from hhy_admin_columnset where col_id = #{colId}
+    </delete>
+
+    <delete id="deleteHhyAdminColumnsetByIds" parameterType="String">
+        delete from hhy_admin_columnset where col_id in
+        <foreach item="colId" collection="array" open="(" separator="," close=")">
+            #{colId}
+        </foreach>
+    </delete>
+</mapper>

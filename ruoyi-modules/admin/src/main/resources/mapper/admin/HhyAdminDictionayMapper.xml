@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminDictionayMapper">
+
+    <resultMap type="HhyAdminDictionay" id="HhyAdminDictionayResult">
+        <result property="dictId"    column="dict_id"    />
+        <result property="dictName"    column="dict_name"    />
+        <result property="dictDefinition"    column="dict_definition"    />
+        <result property="dictDataTypeLength"    column="dict_data_type_length"    />
+        <result property="dictDataType"    column="dict_data_type"    />
+        <result property="uomClass"    column="uom_class"    />
+        <result property="uomRequired"    column="uom_required"    />
+        <result property="picklistname"    column="picklistName"    />
+        <result property="picklistrequired"    column="picklistRequired"    />
+        <result property="groupid"    column="groupid"    />
+        <result property="content"    column="content"    />
+        <result property="seq"    column="seq"    />
+        <result property="dictSort"    column="dict_sort"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminDictionayVo">
+        select dict_id, dict_name, dict_definition, dict_data_type_length, dict_data_type, uom_class, uom_required, picklistName, picklistRequired, groupid, content, seq, dict_sort, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_dictionay
+    </sql>
+
+    <select id="selectHhyAdminDictionayList" parameterType="HhyAdminDictionay" resultMap="HhyAdminDictionayResult">
+        <include refid="selectHhyAdminDictionayVo"/>
+        <where>
+            <if test="dictName != null  and dictName != ''"> and dict_name like concat('%', #{dictName}, '%')</if>
+            <if test="dictDefinition != null  and dictDefinition != ''"> and dict_definition = #{dictDefinition}</if>
+            <if test="dictDataTypeLength != null  and dictDataTypeLength != ''"> and dict_data_type_length = #{dictDataTypeLength}</if>
+            <if test="dictDataType != null  and dictDataType != ''"> and dict_data_type = #{dictDataType}</if>
+            <if test="uomClass != null  and uomClass != ''"> and uom_class = #{uomClass}</if>
+            <if test="uomRequired != null "> and uom_required = #{uomRequired}</if>
+            <if test="picklistname != null  and picklistname != ''"> and picklistName like concat('%', #{picklistname}, '%')</if>
+            <if test="picklistrequired != null "> and picklistRequired = #{picklistrequired}</if>
+            <if test="groupid != null "> and groupid = #{groupid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="seq != null "> and seq = #{seq}</if>
+            <if test="dictSort != null "> and dict_sort = #{dictSort}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminDictionayById" parameterType="Long" resultMap="HhyAdminDictionayResult">
+        <include refid="selectHhyAdminDictionayVo"/>
+        where dict_id = #{dictId}
+    </select>
+
+    <insert id="insertHhyAdminDictionay" parameterType="HhyAdminDictionay" useGeneratedKeys="true" keyProperty="dictId">
+        insert into hhy_admin_dictionay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictName != null and dictName != ''">dict_name,</if>
+            <if test="dictDefinition != null and dictDefinition != ''">dict_definition,</if>
+            <if test="dictDataTypeLength != null and dictDataTypeLength != ''">dict_data_type_length,</if>
+            <if test="dictDataType != null and dictDataType != ''">dict_data_type,</if>
+            <if test="uomClass != null and uomClass != ''">uom_class,</if>
+            <if test="uomRequired != null">uom_required,</if>
+            <if test="picklistname != null and picklistname != ''">picklistName,</if>
+            <if test="picklistrequired != null">picklistRequired,</if>
+            <if test="groupid != null">groupid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="seq != null">seq,</if>
+            <if test="dictSort != null">dict_sort,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictName != null and dictName != ''">#{dictName},</if>
+            <if test="dictDefinition != null and dictDefinition != ''">#{dictDefinition},</if>
+            <if test="dictDataTypeLength != null and dictDataTypeLength != ''">#{dictDataTypeLength},</if>
+            <if test="dictDataType != null and dictDataType != ''">#{dictDataType},</if>
+            <if test="uomClass != null and uomClass != ''">#{uomClass},</if>
+            <if test="uomRequired != null">#{uomRequired},</if>
+            <if test="picklistname != null and picklistname != ''">#{picklistname},</if>
+            <if test="picklistrequired != null">#{picklistrequired},</if>
+            <if test="groupid != null">#{groupid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="seq != null">#{seq},</if>
+            <if test="dictSort != null">#{dictSort},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminDictionay" parameterType="HhyAdminDictionay">
+        update hhy_admin_dictionay
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dictName != null and dictName != ''">dict_name = #{dictName},</if>
+            <if test="dictDefinition != null and dictDefinition != ''">dict_definition = #{dictDefinition},</if>
+            <if test="dictDataTypeLength != null and dictDataTypeLength != ''">dict_data_type_length = #{dictDataTypeLength},</if>
+            <if test="dictDataType != null and dictDataType != ''">dict_data_type = #{dictDataType},</if>
+            <if test="uomClass != null and uomClass != ''">uom_class = #{uomClass},</if>
+            <if test="uomRequired != null">uom_required = #{uomRequired},</if>
+            <if test="picklistname != null and picklistname != ''">picklistName = #{picklistname},</if>
+            <if test="picklistrequired != null">picklistRequired = #{picklistrequired},</if>
+            <if test="groupid != null">groupid = #{groupid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="seq != null">seq = #{seq},</if>
+            <if test="dictSort != null">dict_sort = #{dictSort},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where dict_id = #{dictId}
+    </update>
+
+    <delete id="deleteHhyAdminDictionayById" parameterType="Long">
+        delete from hhy_admin_dictionay where dict_id = #{dictId}
+    </delete>
+
+    <delete id="deleteHhyAdminDictionayByIds" parameterType="String">
+        delete from hhy_admin_dictionay where dict_id in
+        <foreach item="dictId" collection="array" open="(" separator="," close=")">
+            #{dictId}
+        </foreach>
+    </delete>
+</mapper>

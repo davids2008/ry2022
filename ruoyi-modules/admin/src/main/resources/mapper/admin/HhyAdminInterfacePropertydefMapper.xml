@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminInterfacePropertydefMapper">
+
+    <resultMap type="HhyAdminInterfacePropertydef" id="HhyAdminInterfacePropertydefResult">
+        <result property="interProId"    column="inter_pro_id"    />
+        <result property="interId"    column="inter_id"    />
+        <result property="dictId"    column="dict_id"    />
+        <result property="uomId"    column="uom_id"    />
+        <result property="uomUid"    column="uom_uid"    />
+        <result property="dictUid"    column="dict_uid"    />
+        <result property="dictName"    column="dict_name"    />
+        <result property="dictDescription"    column="dict_description"    />
+        <result property="interProDisplayas"    column="inter_pro_displayas"    />
+        <result property="interProType"    column="inter_pro_type"    />
+        <result property="interSeq"    column="inter_seq"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminInterfacePropertydefVo">
+        select inter_pro_id, inter_id, dict_id, uom_id, uom_uid, dict_uid, dict_name, dict_description, inter_pro_displayas, inter_pro_type, inter_seq, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_interface_propertydef
+    </sql>
+
+    <select id="selectHhyAdminInterfacePropertydefList" parameterType="HhyAdminInterfacePropertydef" resultMap="HhyAdminInterfacePropertydefResult">
+        <include refid="selectHhyAdminInterfacePropertydefVo"/>
+        <where>
+            <if test="interId != null "> and inter_id = #{interId}</if>
+            <if test="dictId != null "> and dict_id = #{dictId}</if>
+            <if test="uomId != null "> and uom_id = #{uomId}</if>
+            <if test="uomUid != null "> and uom_uid = #{uomUid}</if>
+            <if test="dictUid != null  and dictUid != ''"> and dict_uid = #{dictUid}</if>
+            <if test="dictName != null  and dictName != ''"> and dict_name like concat('%', #{dictName}, '%')</if>
+            <if test="dictDescription != null  and dictDescription != ''"> and dict_description = #{dictDescription}</if>
+            <if test="interProDisplayas != null  and interProDisplayas != ''"> and inter_pro_displayas = #{interProDisplayas}</if>
+            <if test="interProType != null  and interProType != ''"> and inter_pro_type = #{interProType}</if>
+            <if test="interSeq != null "> and inter_seq = #{interSeq}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminInterfacePropertydefById" parameterType="Long" resultMap="HhyAdminInterfacePropertydefResult">
+        <include refid="selectHhyAdminInterfacePropertydefVo"/>
+        where inter_pro_id = #{interProId}
+    </select>
+
+    <insert id="insertHhyAdminInterfacePropertydef" parameterType="HhyAdminInterfacePropertydef" useGeneratedKeys="true" keyProperty="interProId">
+        insert into hhy_admin_interface_propertydef
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="interId != null">inter_id,</if>
+            <if test="dictId != null">dict_id,</if>
+            <if test="uomId != null">uom_id,</if>
+            <if test="uomUid != null">uom_uid,</if>
+            <if test="dictUid != null">dict_uid,</if>
+            <if test="dictName != null">dict_name,</if>
+            <if test="dictDescription != null">dict_description,</if>
+            <if test="interProDisplayas != null">inter_pro_displayas,</if>
+            <if test="interProType != null">inter_pro_type,</if>
+            <if test="interSeq != null">inter_seq,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="interId != null">#{interId},</if>
+            <if test="dictId != null">#{dictId},</if>
+            <if test="uomId != null">#{uomId},</if>
+            <if test="uomUid != null">#{uomUid},</if>
+            <if test="dictUid != null">#{dictUid},</if>
+            <if test="dictName != null">#{dictName},</if>
+            <if test="dictDescription != null">#{dictDescription},</if>
+            <if test="interProDisplayas != null">#{interProDisplayas},</if>
+            <if test="interProType != null">#{interProType},</if>
+            <if test="interSeq != null">#{interSeq},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminInterfacePropertydef" parameterType="HhyAdminInterfacePropertydef">
+        update hhy_admin_interface_propertydef
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="interId != null">inter_id = #{interId},</if>
+            <if test="dictId != null">dict_id = #{dictId},</if>
+            <if test="uomId != null">uom_id = #{uomId},</if>
+            <if test="uomUid != null">uom_uid = #{uomUid},</if>
+            <if test="dictUid != null">dict_uid = #{dictUid},</if>
+            <if test="dictName != null">dict_name = #{dictName},</if>
+            <if test="dictDescription != null">dict_description = #{dictDescription},</if>
+            <if test="interProDisplayas != null">inter_pro_displayas = #{interProDisplayas},</if>
+            <if test="interProType != null">inter_pro_type = #{interProType},</if>
+            <if test="interSeq != null">inter_seq = #{interSeq},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where inter_pro_id = #{interProId}
+    </update>
+
+    <delete id="deleteHhyAdminInterfacePropertydefById" parameterType="Long">
+        delete from hhy_admin_interface_propertydef where inter_pro_id = #{interProId}
+    </delete>
+
+    <delete id="deleteHhyAdminInterfacePropertydefByIds" parameterType="String">
+        delete from hhy_admin_interface_propertydef where inter_pro_id in
+        <foreach item="interProId" collection="array" open="(" separator="," close=")">
+            #{interProId}
+        </foreach>
+    </delete>
+</mapper>

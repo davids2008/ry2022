@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminSystemhierarchyMapper">
+
+    <resultMap type="HhyAdminSystemhierarchy" id="HhyAdminSystemhierarchyResult">
+        <result property="syshId"    column="sysh_id"    />
+        <result property="syshName"    column="sysh_name"    />
+        <result property="syshParentid"    column="sysh_parentid"    />
+        <result property="syshParentName"    column="sysh_parent_name"    />
+        <result property="syshDescription"    column="sysh_description"    />
+        <result property="syshClassRootUid"    column="sysh_class_root_uid"    />
+        <result property="syshClassRootName"    column="sysh_class_root_name"    />
+        <result property="syshType"    column="sysh_type"    />
+        <result property="syshSystemClass"    column="sysh_system_class"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminSystemhierarchyVo">
+        select sysh_id, sysh_name, sysh_parentid, sysh_parent_name, sysh_description, sysh_class_root_uid, sysh_class_root_name, sysh_type, sysh_system_class, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_systemhierarchy
+    </sql>
+
+    <select id="selectHhyAdminSystemhierarchyList" parameterType="HhyAdminSystemhierarchy" resultMap="HhyAdminSystemhierarchyResult">
+        <include refid="selectHhyAdminSystemhierarchyVo"/>
+        <where>
+            <if test="syshName != null  and syshName != ''"> and sysh_name like concat('%', #{syshName}, '%')</if>
+            <if test="syshParentid != null "> and sysh_parentid = #{syshParentid}</if>
+            <if test="syshParentName != null  and syshParentName != ''"> and sysh_parent_name like concat('%', #{syshParentName}, '%')</if>
+            <if test="syshDescription != null  and syshDescription != ''"> and sysh_description = #{syshDescription}</if>
+            <if test="syshClassRootUid != null  and syshClassRootUid != ''"> and sysh_class_root_uid = #{syshClassRootUid}</if>
+            <if test="syshClassRootName != null  and syshClassRootName != ''"> and sysh_class_root_name like concat('%', #{syshClassRootName}, '%')</if>
+            <if test="syshType != null  and syshType != ''"> and sysh_type = #{syshType}</if>
+            <if test="syshSystemClass != null  and syshSystemClass != ''"> and sysh_system_class = #{syshSystemClass}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminSystemhierarchyById" parameterType="Long" resultMap="HhyAdminSystemhierarchyResult">
+        <include refid="selectHhyAdminSystemhierarchyVo"/>
+        where sysh_id = #{syshId}
+    </select>
+
+    <insert id="insertHhyAdminSystemhierarchy" parameterType="HhyAdminSystemhierarchy" useGeneratedKeys="true" keyProperty="syshId">
+        insert into hhy_admin_systemhierarchy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="syshName != null and syshName != ''">sysh_name,</if>
+            <if test="syshParentid != null">sysh_parentid,</if>
+            <if test="syshParentName != null and syshParentName != ''">sysh_parent_name,</if>
+            <if test="syshDescription != null and syshDescription != ''">sysh_description,</if>
+            <if test="syshClassRootUid != null and syshClassRootUid != ''">sysh_class_root_uid,</if>
+            <if test="syshClassRootName != null and syshClassRootName != ''">sysh_class_root_name,</if>
+            <if test="syshType != null and syshType != ''">sysh_type,</if>
+            <if test="syshSystemClass != null and syshSystemClass != ''">sysh_system_class,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="syshName != null and syshName != ''">#{syshName},</if>
+            <if test="syshParentid != null">#{syshParentid},</if>
+            <if test="syshParentName != null and syshParentName != ''">#{syshParentName},</if>
+            <if test="syshDescription != null and syshDescription != ''">#{syshDescription},</if>
+            <if test="syshClassRootUid != null and syshClassRootUid != ''">#{syshClassRootUid},</if>
+            <if test="syshClassRootName != null and syshClassRootName != ''">#{syshClassRootName},</if>
+            <if test="syshType != null and syshType != ''">#{syshType},</if>
+            <if test="syshSystemClass != null and syshSystemClass != ''">#{syshSystemClass},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminSystemhierarchy" parameterType="HhyAdminSystemhierarchy">
+        update hhy_admin_systemhierarchy
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="syshName != null and syshName != ''">sysh_name = #{syshName},</if>
+            <if test="syshParentid != null">sysh_parentid = #{syshParentid},</if>
+            <if test="syshParentName != null and syshParentName != ''">sysh_parent_name = #{syshParentName},</if>
+            <if test="syshDescription != null and syshDescription != ''">sysh_description = #{syshDescription},</if>
+            <if test="syshClassRootUid != null and syshClassRootUid != ''">sysh_class_root_uid = #{syshClassRootUid},</if>
+            <if test="syshClassRootName != null and syshClassRootName != ''">sysh_class_root_name = #{syshClassRootName},</if>
+            <if test="syshType != null and syshType != ''">sysh_type = #{syshType},</if>
+            <if test="syshSystemClass != null and syshSystemClass != ''">sysh_system_class = #{syshSystemClass},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where sysh_id = #{syshId}
+    </update>
+
+    <delete id="deleteHhyAdminSystemhierarchyById" parameterType="Long">
+        delete from hhy_admin_systemhierarchy where sysh_id = #{syshId}
+    </delete>
+
+    <delete id="deleteHhyAdminSystemhierarchyByIds" parameterType="String">
+        delete from hhy_admin_systemhierarchy where sysh_id in
+        <foreach item="syshId" collection="array" open="(" separator="," close=")">
+            #{syshId}
+        </foreach>
+    </delete>
+</mapper>

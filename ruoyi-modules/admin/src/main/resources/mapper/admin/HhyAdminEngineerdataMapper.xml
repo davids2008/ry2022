@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminEngineerdataMapper">
+
+    <resultMap type="HhyAdminEngineerdata" id="HhyAdminEngineerdataResult">
+        <result property="engId"    column="eng_id"    />
+        <result property="engName"    column="eng_name"    />
+        <result property="engDescription"    column="eng_description"    />
+        <result property="engAddrIp"    column="eng_addr_ip"    />
+        <result property="engPort"    column="eng_port"    />
+        <result property="engUsername"    column="eng_username"    />
+        <result property="engPasswd"    column="eng_passwd"    />
+        <result property="engType"    column="eng_type"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminEngineerdataVo">
+        select eng_id, eng_name, eng_description, eng_addr_ip, eng_port, eng_username, eng_passwd, eng_type, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_engineerdata
+    </sql>
+
+    <select id="selectHhyAdminEngineerdataList" parameterType="HhyAdminEngineerdata" resultMap="HhyAdminEngineerdataResult">
+        <include refid="selectHhyAdminEngineerdataVo"/>
+        <where>
+            <if test="engName != null  and engName != ''"> and eng_name like concat('%', #{engName}, '%')</if>
+            <if test="engDescription != null  and engDescription != ''"> and eng_description = #{engDescription}</if>
+            <if test="engAddrIp != null  and engAddrIp != ''"> and eng_addr_ip = #{engAddrIp}</if>
+            <if test="engPort != null "> and eng_port = #{engPort}</if>
+            <if test="engUsername != null  and engUsername != ''"> and eng_username like concat('%', #{engUsername}, '%')</if>
+            <if test="engPasswd != null  and engPasswd != ''"> and eng_passwd = #{engPasswd}</if>
+            <if test="engType != null  and engType != ''"> and eng_type = #{engType}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminEngineerdataById" parameterType="Long" resultMap="HhyAdminEngineerdataResult">
+        <include refid="selectHhyAdminEngineerdataVo"/>
+        where eng_id = #{engId}
+    </select>
+
+    <insert id="insertHhyAdminEngineerdata" parameterType="HhyAdminEngineerdata" useGeneratedKeys="true" keyProperty="engId">
+        insert into hhy_admin_engineerdata
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="engName != null and engName != ''">eng_name,</if>
+            <if test="engDescription != null and engDescription != ''">eng_description,</if>
+            <if test="engAddrIp != null and engAddrIp != ''">eng_addr_ip,</if>
+            <if test="engPort != null">eng_port,</if>
+            <if test="engUsername != null and engUsername != ''">eng_username,</if>
+            <if test="engPasswd != null and engPasswd != ''">eng_passwd,</if>
+            <if test="engType != null and engType != ''">eng_type,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="engName != null and engName != ''">#{engName},</if>
+            <if test="engDescription != null and engDescription != ''">#{engDescription},</if>
+            <if test="engAddrIp != null and engAddrIp != ''">#{engAddrIp},</if>
+            <if test="engPort != null">#{engPort},</if>
+            <if test="engUsername != null and engUsername != ''">#{engUsername},</if>
+            <if test="engPasswd != null and engPasswd != ''">#{engPasswd},</if>
+            <if test="engType != null and engType != ''">#{engType},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminEngineerdata" parameterType="HhyAdminEngineerdata">
+        update hhy_admin_engineerdata
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="engName != null and engName != ''">eng_name = #{engName},</if>
+            <if test="engDescription != null and engDescription != ''">eng_description = #{engDescription},</if>
+            <if test="engAddrIp != null and engAddrIp != ''">eng_addr_ip = #{engAddrIp},</if>
+            <if test="engPort != null">eng_port = #{engPort},</if>
+            <if test="engUsername != null and engUsername != ''">eng_username = #{engUsername},</if>
+            <if test="engPasswd != null and engPasswd != ''">eng_passwd = #{engPasswd},</if>
+            <if test="engType != null and engType != ''">eng_type = #{engType},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where eng_id = #{engId}
+    </update>
+
+    <delete id="deleteHhyAdminEngineerdataById" parameterType="Long">
+        delete from hhy_admin_engineerdata where eng_id = #{engId}
+    </delete>
+
+    <delete id="deleteHhyAdminEngineerdataByIds" parameterType="String">
+        delete from hhy_admin_engineerdata where eng_id in
+        <foreach item="engId" collection="array" open="(" separator="," close=")">
+            #{engId}
+        </foreach>
+    </delete>
+</mapper>

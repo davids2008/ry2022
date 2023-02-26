@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminUomUnitsMapper">
+
+    <resultMap type="HhyAdminUomUnits" id="HhyAdminUomUnitsResult">
+        <result property="uomUnitsId"    column="uom_units_id"    />
+        <result property="uomUnitsUuid"    column="uom_units_uuid"    />
+        <result property="uomUnitsName"    column="uom_units_name"    />
+        <result property="uomClassDescription"    column="uom_class_description"    />
+        <result property="uomClassSymbol"    column="uom_class_symbol"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminUomUnitsVo">
+        select uom_units_id, uom_units_uuid, uom_units_name, uom_class_description, uom_class_symbol, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_uom_units
+    </sql>
+
+    <select id="selectHhyAdminUomUnitsList" parameterType="HhyAdminUomUnits" resultMap="HhyAdminUomUnitsResult">
+        <include refid="selectHhyAdminUomUnitsVo"/>
+        <where>
+            <if test="uomUnitsUuid != null  and uomUnitsUuid != ''"> and uom_units_uuid = #{uomUnitsUuid}</if>
+            <if test="uomUnitsName != null  and uomUnitsName != ''"> and uom_units_name like concat('%', #{uomUnitsName}, '%')</if>
+            <if test="uomClassDescription != null  and uomClassDescription != ''"> and uom_class_description = #{uomClassDescription}</if>
+            <if test="uomClassSymbol != null  and uomClassSymbol != ''"> and uom_class_symbol = #{uomClassSymbol}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminUomUnitsById" parameterType="Long" resultMap="HhyAdminUomUnitsResult">
+        <include refid="selectHhyAdminUomUnitsVo"/>
+        where uom_units_id = #{uomUnitsId}
+    </select>
+
+    <insert id="insertHhyAdminUomUnits" parameterType="HhyAdminUomUnits" useGeneratedKeys="true" keyProperty="uomUnitsId">
+        insert into hhy_admin_uom_units
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uomUnitsUuid != null and uomUnitsUuid != ''">uom_units_uuid,</if>
+            <if test="uomUnitsName != null and uomUnitsName != ''">uom_units_name,</if>
+            <if test="uomClassDescription != null and uomClassDescription != ''">uom_class_description,</if>
+            <if test="uomClassSymbol != null and uomClassSymbol != ''">uom_class_symbol,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uomUnitsUuid != null and uomUnitsUuid != ''">#{uomUnitsUuid},</if>
+            <if test="uomUnitsName != null and uomUnitsName != ''">#{uomUnitsName},</if>
+            <if test="uomClassDescription != null and uomClassDescription != ''">#{uomClassDescription},</if>
+            <if test="uomClassSymbol != null and uomClassSymbol != ''">#{uomClassSymbol},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminUomUnits" parameterType="HhyAdminUomUnits">
+        update hhy_admin_uom_units
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="uomUnitsUuid != null and uomUnitsUuid != ''">uom_units_uuid = #{uomUnitsUuid},</if>
+            <if test="uomUnitsName != null and uomUnitsName != ''">uom_units_name = #{uomUnitsName},</if>
+            <if test="uomClassDescription != null and uomClassDescription != ''">uom_class_description = #{uomClassDescription},</if>
+            <if test="uomClassSymbol != null and uomClassSymbol != ''">uom_class_symbol = #{uomClassSymbol},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where uom_units_id = #{uomUnitsId}
+    </update>
+
+    <delete id="deleteHhyAdminUomUnitsById" parameterType="Long">
+        delete from hhy_admin_uom_units where uom_units_id = #{uomUnitsId}
+    </delete>
+
+    <delete id="deleteHhyAdminUomUnitsByIds" parameterType="String">
+        delete from hhy_admin_uom_units where uom_units_id in
+        <foreach item="uomUnitsId" collection="array" open="(" separator="," close=")">
+            #{uomUnitsId}
+        </foreach>
+    </delete>
+</mapper>

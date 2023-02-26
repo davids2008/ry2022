@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.SysUserRoleMapper">
+
+	<resultMap type="SysUserProj" id="SysUserProjResult">
+		<result property="userId"     column="user_id"      />
+		<result property="projId"     column="proj_id"      />
+	</resultMap>
+
+	<delete id="deleteUserProjByUserId" parameterType="Long">
+		delete from sys_user_proj where user_id=#{userId}
+	</delete>
+	
+
+	
+	<delete id="deleteUserProj" parameterType="Long">
+ 		delete from sys_user_proj where user_id in
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach> 
+ 	</delete>
+	
+	<insert id="batchUserProj">
+		insert into sys_user_proj(user_id, proj_id) values
+		<foreach item="item" index="index" collection="list" separator=",">
+			(#{item.userId},#{item.proj_id})
+		</foreach>
+	</insert>
+	
+	<delete id="deleteUserProjnfo" parameterType="SysUserRole">
+		delete from sys_user_proj where user_id=#{userId} and proj_id=#{proj_Id}
+	</delete>
+	
+	<delete id="deleteUserProjInfos">
+	    delete from sys_user_role where role_id=#{roleId} and user_id in
+ 	    <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+ 	        #{userId}
+            </foreach> 
+	</delete>
+</mapper> 

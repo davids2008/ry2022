@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminSubprojectMapper">
+
+    <resultMap type="HhyAdminSubproject" id="HhyAdminSubprojectResult">
+        <result property="projSubid"    column="proj_subid"    />
+        <result property="projSubname"    column="proj_subname"    />
+        <result property="projSubdescription"    column="proj_subdescription"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminSubprojectVo">
+        select proj_subid, proj_subname, proj_subdescription, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_subproject
+    </sql>
+
+    <select id="selectHhyAdminSubprojectList" parameterType="HhyAdminSubproject" resultMap="HhyAdminSubprojectResult">
+        <include refid="selectHhyAdminSubprojectVo"/>
+        <where>
+            <if test="projSubname != null  and projSubname != ''"> and proj_subname like concat('%', #{projSubname}, '%')</if>
+            <if test="projSubdescription != null  and projSubdescription != ''"> and proj_subdescription = #{projSubdescription}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminSubprojectById" parameterType="Long" resultMap="HhyAdminSubprojectResult">
+        <include refid="selectHhyAdminSubprojectVo"/>
+        where proj_subid = #{projSubid}
+    </select>
+
+    <insert id="insertHhyAdminSubproject" parameterType="HhyAdminSubproject" useGeneratedKeys="true" keyProperty="projSubid">
+        insert into hhy_admin_subproject
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projSubname != null and projSubname != ''">proj_subname,</if>
+            <if test="projSubdescription != null">proj_subdescription,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projSubname != null and projSubname != ''">#{projSubname},</if>
+            <if test="projSubdescription != null">#{projSubdescription},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminSubproject" parameterType="HhyAdminSubproject">
+        update hhy_admin_subproject
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projSubname != null and projSubname != ''">proj_subname = #{projSubname},</if>
+            <if test="projSubdescription != null">proj_subdescription = #{projSubdescription},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where proj_subid = #{projSubid}
+    </update>
+
+    <delete id="deleteHhyAdminSubprojectById" parameterType="Long">
+        delete from hhy_admin_subproject where proj_subid = #{projSubid}
+    </delete>
+
+    <delete id="deleteHhyAdminSubprojectByIds" parameterType="String">
+        delete from hhy_admin_subproject where proj_subid in
+        <foreach item="projSubid" collection="array" open="(" separator="," close=")">
+            #{projSubid}
+        </foreach>
+    </delete>
+</mapper>

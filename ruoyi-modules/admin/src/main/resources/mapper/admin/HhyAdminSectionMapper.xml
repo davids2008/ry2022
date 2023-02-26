@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminSectionMapper">
+
+    <resultMap type="HhyAdminSection" id="HhyAdminSectionResult">
+        <result property="secId"    column="sec_id"    />
+        <result property="secUuid"    column="sec_uuid"    />
+        <result property="secName"    column="sec_name"    />
+        <result property="secDescription"    column="sec_description"    />
+        <result property="secDisplayas"    column="sec_displayas"    />
+        <result property="colId"    column="col_id"    />
+        <result property="colUid"    column="col_uid"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="projId"    column="proj_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminSectionVo">
+        select sec_id, sec_uuid, sec_name, sec_description, sec_displayas, col_id, col_uid, status, create_by, create_time, update_by, update_time, remark, proj_id from hhy_admin_section
+    </sql>
+
+    <select id="selectHhyAdminSectionList" parameterType="HhyAdminSection" resultMap="HhyAdminSectionResult">
+        <include refid="selectHhyAdminSectionVo"/>
+        <where>
+            <if test="secUuid != null "> and sec_uuid = #{secUuid}</if>
+            <if test="secName != null  and secName != ''"> and sec_name like concat('%', #{secName}, '%')</if>
+            <if test="secDescription != null  and secDescription != ''"> and sec_description = #{secDescription}</if>
+            <if test="secDisplayas != null  and secDisplayas != ''"> and sec_displayas = #{secDisplayas}</if>
+            <if test="colId != null "> and col_id = #{colId}</if>
+            <if test="colUid != null "> and col_uid = #{colUid}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="projId != null "> and proj_id = #{projId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminSectionById" parameterType="Long" resultMap="HhyAdminSectionResult">
+        <include refid="selectHhyAdminSectionVo"/>
+        where sec_id = #{secId}
+    </select>
+
+    <insert id="insertHhyAdminSection" parameterType="HhyAdminSection" useGeneratedKeys="true" keyProperty="secId">
+        insert into hhy_admin_section
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="secUuid != null">sec_uuid,</if>
+            <if test="secName != null and secName != ''">sec_name,</if>
+            <if test="secDescription != null">sec_description,</if>
+            <if test="secDisplayas != null">sec_displayas,</if>
+            <if test="colId != null">col_id,</if>
+            <if test="colUid != null">col_uid,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="projId != null">proj_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="secUuid != null">#{secUuid},</if>
+            <if test="secName != null and secName != ''">#{secName},</if>
+            <if test="secDescription != null">#{secDescription},</if>
+            <if test="secDisplayas != null">#{secDisplayas},</if>
+            <if test="colId != null">#{colId},</if>
+            <if test="colUid != null">#{colUid},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="projId != null">#{projId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminSection" parameterType="HhyAdminSection">
+        update hhy_admin_section
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="secUuid != null">sec_uuid = #{secUuid},</if>
+            <if test="secName != null and secName != ''">sec_name = #{secName},</if>
+            <if test="secDescription != null">sec_description = #{secDescription},</if>
+            <if test="secDisplayas != null">sec_displayas = #{secDisplayas},</if>
+            <if test="colId != null">col_id = #{colId},</if>
+            <if test="colUid != null">col_uid = #{colUid},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="projId != null">proj_id = #{projId},</if>
+        </trim>
+        where sec_id = #{secId}
+    </update>
+
+    <delete id="deleteHhyAdminSectionById" parameterType="Long">
+        delete from hhy_admin_section where sec_id = #{secId}
+    </delete>
+
+    <delete id="deleteHhyAdminSectionByIds" parameterType="String">
+        delete from hhy_admin_section where sec_id in
+        <foreach item="secId" collection="array" open="(" separator="," close=")">
+            #{secId}
+        </foreach>
+    </delete>
+</mapper>

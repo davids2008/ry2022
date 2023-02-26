@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.HhyAdminSectionViewRelatedMapper">
+
+    <resultMap type="HhyAdminSectionViewRelated" id="HhyAdminSectionViewRelatedResult">
+        <result property="secRelId"    column="sec_rel_id"    />
+        <result property="secRelIdOt"    column="sec_rel_id_ot"    />
+        <result property="secRelSeq"    column="sec_rel_seq"    />
+        <result property="status"    column="status"    />
+        <result property="createBy"    column="create_by"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="remark"    column="remark"    />
+        <result property="secId"    column="sec_id"    />
+    </resultMap>
+
+    <sql id="selectHhyAdminSectionViewRelatedVo">
+        select sec_rel_id, sec_rel_id_ot, sec_rel_seq, status, create_by, create_time, update_by, update_time, remark, sec_id from hhy_admin_section_view_related
+    </sql>
+
+    <select id="selectHhyAdminSectionViewRelatedList" parameterType="HhyAdminSectionViewRelated" resultMap="HhyAdminSectionViewRelatedResult">
+        <include refid="selectHhyAdminSectionViewRelatedVo"/>
+        <where>
+            <if test="secRelIdOt != null "> and sec_rel_id_ot = #{secRelIdOt}</if>
+            <if test="secRelSeq != null "> and sec_rel_seq = #{secRelSeq}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="secId != null "> and sec_id = #{secId}</if>
+        </where>
+    </select>
+
+    <select id="selectHhyAdminSectionViewRelatedById" parameterType="Long" resultMap="HhyAdminSectionViewRelatedResult">
+        <include refid="selectHhyAdminSectionViewRelatedVo"/>
+        where sec_rel_id = #{secRelId}
+    </select>
+
+    <insert id="insertHhyAdminSectionViewRelated" parameterType="HhyAdminSectionViewRelated" useGeneratedKeys="true" keyProperty="secRelId">
+        insert into hhy_admin_section_view_related
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="secRelIdOt != null">sec_rel_id_ot,</if>
+            <if test="secRelSeq != null">sec_rel_seq,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="secId != null">sec_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="secRelIdOt != null">#{secRelIdOt},</if>
+            <if test="secRelSeq != null">#{secRelSeq},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="secId != null">#{secId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateHhyAdminSectionViewRelated" parameterType="HhyAdminSectionViewRelated">
+        update hhy_admin_section_view_related
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="secRelIdOt != null">sec_rel_id_ot = #{secRelIdOt},</if>
+            <if test="secRelSeq != null">sec_rel_seq = #{secRelSeq},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="secId != null">sec_id = #{secId},</if>
+        </trim>
+        where sec_rel_id = #{secRelId}
+    </update>
+
+    <delete id="deleteHhyAdminSectionViewRelatedById" parameterType="Long">
+        delete from hhy_admin_section_view_related where sec_rel_id = #{secRelId}
+    </delete>
+
+    <delete id="deleteHhyAdminSectionViewRelatedByIds" parameterType="String">
+        delete from hhy_admin_section_view_related where sec_rel_id in
+        <foreach item="secRelId" collection="array" open="(" separator="," close=")">
+            #{secRelId}
+        </foreach>
+    </delete>
+</mapper>
